@@ -1,17 +1,34 @@
 import React from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
  
 
 
-const Login = () => {
+const LoginPage = () => {
+  const [user, setuser] = useState({userName:'', Password:''});
+  const navigate = useNavigate();
+
+  const login = async(e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post('/api/v1/users/login',user,{withCredentials: true});
+      navigate('/home');
+    } catch (error) {
+      console.log(error)
+    }
+    
+
+  };
     return (
-       <div class = 'signIn' >
+       <div className = 'signIn' >
          <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>Nigger Website</Card.Title>
@@ -19,26 +36,32 @@ const Login = () => {
           <Card.Text>
             you want to register or sign in?
           </Card.Text>
-          {/* is href ok? */}
+          
           <InputGroup className="mb-3">
         <Form.Control
+        value={user.userName}
+        onChange={(e) => setuser({...user, userName: e.target.value})}
           placeholder="Username"
           aria-label="Username"
-          aria-describedby="basic-addon1"
+          aria-describedby="signIn"
         />
       </InputGroup>
 
       <InputGroup className="mb-3">
         <Form.Control
+          value={user.Password}
+          onChange={(e) => setuser({...user, Password: e.target.value})}
+          onSubmit={login}
           placeholder="Password"
           aria-label="Password"
-          aria-describedby="basic-addon1"
+          aria-describedby="signIn"
         //   משפט טרנרי בטייפ בשביל לעשות שאפשר לראות
           type='password'
         />
       </InputGroup>
-         
-      <Button variant="info">Sign In</Button>
+         {/* is href ok? */}
+        
+      <Button id='signIn' type='submit' variant="info">Sign In</Button>
       <Button variant="info">Register</Button>
        
         </Card.Body>
@@ -47,4 +70,4 @@ const Login = () => {
       );
     }
 
-export default Login
+export default LoginPage
