@@ -16,17 +16,16 @@ const LoginPage = () => {
   const [user, setuser] = useState({username:'', password:''});
   const navigate = useNavigate();
 
-  const login = async(e) => {
-    e.preventDefault();
+  const login = async(e) => { e.preventDefault();
     try {
+      console.log('nigger')
       const res = await axios.post('/api/v1/users/login',user,{withCredentials: true});
       navigate('/home');
     } catch (error) {
       console.log(error)
     }
-    
-
-  };
+     };
+     
     return (
        <div className = 'signIn' >
          <Card style={{ width: '18rem' }}>
@@ -45,24 +44,23 @@ const LoginPage = () => {
           aria-label="Username"
           aria-describedby="signIn"
         />
-      </InputGroup>
+      
 
-      <InputGroup className="mb-3">
+      
         <Form.Control
           value={user.Password}
           onChange={(e) => setuser({...user, password: e.target.value})}
-          onSubmit={login}
           placeholder="Password"
           aria-label="Password"
           aria-describedby="signIn"
         //   משפט טרנרי בטייפ בשביל לעשות שאפשר לראות
           type='password'
         />
+        <Button id='signIn' type='submit' onClick={login}  variant="info">Sign In</Button>
       </InputGroup>
          {/* is href ok? */}
         
-      <Button id='signIn' type='submit' variant="info">Sign In</Button>
-      <Button variant="info">Register</Button>
+      <Button type='submit' variant="info">Register</Button>
        
         </Card.Body>
       </Card>
