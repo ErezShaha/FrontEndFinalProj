@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router';
 
 
 const LoginPage = () => {
-  const [user, setuser] = useState({userName:'', Password:''});
+  const [user, setuser] = useState({username:'', password:''});
   const navigate = useNavigate();
 
   const login = async(e) => {
@@ -40,7 +40,7 @@ const LoginPage = () => {
           <InputGroup className="mb-3">
         <Form.Control
         value={user.userName}
-        onChange={(e) => setuser({...user, userName: e.target.value})}
+        onChange={(e) => setuser({...user, username: e.target.value})}
           placeholder="Username"
           aria-label="Username"
           aria-describedby="signIn"
@@ -50,7 +50,7 @@ const LoginPage = () => {
       <InputGroup className="mb-3">
         <Form.Control
           value={user.Password}
-          onChange={(e) => setuser({...user, Password: e.target.value})}
+          onChange={(e) => setuser({...user, password: e.target.value})}
           onSubmit={login}
           placeholder="Password"
           aria-label="Password"
