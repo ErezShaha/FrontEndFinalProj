@@ -40,6 +40,7 @@ const LoginPage = () => {
      const register = async(e) => {
       try {
         const res = await axios.post('/api/v1/users/signup',user,{withCredentials: true});
+
       } catch (error) {
         console.log(error)
       }
@@ -113,7 +114,7 @@ const LoginPage = () => {
          onChange={(e) => setuserRegister({...user, username: e.target.value})}
            placeholder="Username"
            aria-label="Username"
-           aria-describedby="signIn"
+           aria-describedby="register"
          />
          <br/>
            </InputGroup>
@@ -128,14 +129,14 @@ const LoginPage = () => {
            onChange={(e) => setuser({...user, password: e.target.value})}
            placeholder="Password"
            aria-label="Password"
-           aria-describedby="signIn"  
+           aria-describedby="register"  
            type={PassowrdVis}
          />
          <Button onMouseDown={()=> setPassVIs('text')} onMouseUp={()=> setPassVIs('password')}>o</Button>
        </InputGroup>
 
          
-         <Button type='submit' variant="primary">Register</Button>
+         <Button id='register' type='submit' onClick={register} variant="primary">Register</Button>
          <br/><br/>
          <Button type='submit' onClick={toggleCard}  variant="info">Sign In</Button>
         
