@@ -8,20 +8,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import '../styles/LoginPage.css';
+import { useGlobalContext } from '../contexts/GlobalContext';
 
  
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  //const {user} = useGlobalContext();
   const [user, setuser] = useState({username:'', password:''});
-  //const [userRegister, setuserRegister] = useState({username:'', password:''});
   const [PassowrdVis, setPassVIs] = useState('password');
-  const [holdMouse, setholdMouse] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isCard, setisCard] = useState(true);
-
+  const {setmainUser} = useGlobalContext();
   const toggleCard = () => {
     setuser({username:'', password:''});
     console.log('toggle card');
@@ -33,6 +32,7 @@ const LoginPage = () => {
     setIsDisabled(true);
     try {
       const res = await axios.post('/api/v1/users/login',user,{withCredentials: true});
+      setmainUser(res.data);
       navigate('/home');
     } catch (error) {
       console.log(error)
