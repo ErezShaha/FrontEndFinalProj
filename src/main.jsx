@@ -11,13 +11,13 @@ axios.defaults.baseURL = "http://localhost:8080";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <GlobalStateProvider>
+    {/* <GlobalStateProvider> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
-    </GlobalStateProvider>
+    {/* </GlobalStateProvider> */}
   </StrictMode>
 );
