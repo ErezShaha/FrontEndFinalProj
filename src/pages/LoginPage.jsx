@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -8,7 +7,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import "../styles/LoginPage.css";
+import { socket } from "../utils/socket.js";
 // import { useGlobalContext } from "../contexts/GlobalContext";
+
+// http://localhost:5173/
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -16,23 +18,28 @@ const LoginPage = () => {
   const [user, setuser] = useState({ username: "", password: "" });
   const [PassowrdVis, setPassVIs] = useState("password");
   const [isCard, setisCard] = useState(true);
+  const [errorMsg, seterrorMsg] = useState();
   // const { setmainUser } = useGlobalContext();
 
   const toggleCard = () => {
     setuser({ username: "", password: "" });
     console.log("toggle card");
+    seterrorMsg(null);
     setisCard(!isCard);
   };
 
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/users/login", user, {
-        withCredentials: true,
+      await axios.post("/api/v1/users/login", user, {withCredentials: true,})
+      .then((res) => {
+        console.log(res);
+        socket.emit("UserLogin", res.data);
+        // setmainUser(res.data); delete?
+        navigate("/home");
       });
-      // setmainUser(res.data);
-      navigate("/home");
     } catch (error) {
+      seterrorMsg(error.response.data.error);
       console.log(error);
     }
   };
@@ -41,15 +48,26 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(user);
     try {
-      const res = await axios.post("/api/v1/users/signup", user, {
-        withCredentials: true,
-      });
+      await axios.post("/api/v1/users/signup", user, {withCredentials: true});
       console.log("User registered successfully");
       toggleCard();
     } catch (error) {
+      seterrorMsg(error.response.data.error);
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    axios.post('/api/v1/users/logout',null,{withCredentials: true})
+      .then((res) => {
+        console.log(res);
+        socket.emit("UserLogout");
+      })
+      .catch((err) => {
+        seterrorMsg(error.response.data.error);
+        console.log(err);
+      })
+  }, [])
 
   return (
     <div>
@@ -102,7 +120,7 @@ const LoginPage = () => {
                 </Form.Group>
               </Form>
               <br />
-              <br />
+              {errorMsg == null ? <br /> : <p>{errorMsg}</p>}
               <Button variant="primary" onClick={toggleCard}>
                 Register
               </Button>
@@ -162,7 +180,7 @@ const LoginPage = () => {
                 </Form.Group>
               </Form>
               <br />
-              <br />
+              {errorMsg == null ? <br /> : <p>{errorMsg}</p>}
               <Button onClick={toggleCard} variant="info">
                 Sign In
               </Button>
