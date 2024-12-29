@@ -10,16 +10,9 @@ const TestPage = () => {
     const navigate = useNavigate();
 
     const logout = async () => {
-        await axios.post('/api/v1/users/logout',null,{withCredentials: true})
-        .then((res) => {
         console.log("byebye");
-        socket.emit("UserLogout");
-        navigate('/')
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
+        navigate("/");
+      };
 
     const lookAtOnlineUsers = async () => {
         socket.emit("lookAtOnlineUsers");

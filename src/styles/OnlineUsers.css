@@ -1,0 +1,12 @@
+li::marker{
+    color: green;
+}
+
+.userCard{
+    background-color: beige !important;
+    
+}
+
+.onlineFriends{
+    width: 100;
+}

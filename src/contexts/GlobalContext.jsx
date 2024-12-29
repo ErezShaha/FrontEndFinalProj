@@ -5,7 +5,8 @@ export const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 export const GlobalStateProvider = ({children}) => {
-    const [mainUser, setmainUser] = useState({username: '', password: ''});
+    const potentialUsername = sessionStorage.getItem('user');
+    const [mainUser, setmainUser] = useState({username: potentialUsername ? potentialUsername : '', password: ''});
 
     return (
         <GlobalContext.Provider value={{mainUser,setmainUser}}>

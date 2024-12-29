@@ -8,7 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import "../styles/LoginPage.css";
 import { socket } from "../utils/socket.js";
-// import { useGlobalContext } from "../contexts/GlobalContext";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 // http://localhost:5173/
 
@@ -19,7 +19,22 @@ const LoginPage = () => {
   const [PassowrdVis, setPassVIs] = useState("password");
   const [isCard, setisCard] = useState(true);
   const [errorMsg, seterrorMsg] = useState();
-  // const { setmainUser } = useGlobalContext();
+  const { setmainUser, mainUser } = useGlobalContext();
+
+  useEffect(() => {
+    axios
+      .post("/api/v1/users/logout", null, { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        socket.emit("UserLogout");
+        sessionStorage.clear()
+      })
+      .catch((err) => {
+        seterrorMsg(error.response.data.error);
+        console.log(err);
+      });
+  }, []);
+
 
   const toggleCard = () => {
     setuser({ username: "", password: "" });
@@ -31,24 +46,24 @@ const LoginPage = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/users/login", user, {withCredentials: true,})
-      .then((res) => {
-        console.log(res);
-        socket.emit("UserLogin", res.data);
-        // setmainUser(res.data); delete?
-        navigate("/home");
+      const res = await axios.post("/api/v1/users/login", user, {
+        withCredentials: true,
       });
+      socket.emit("UserLogin", res.data);
+      sessionStorage.setItem("user", res.data);
+      setmainUser({ ...mainUser, username: res.data });
+      navigate("/home");
     } catch (error) {
-      seterrorMsg(error.response.data.error);
       console.log(error);
     }
   };
+  
 
   const register = async (e) => {
     e.preventDefault();
     console.log(user);
     try {
-      await axios.post("/api/v1/users/signup", user, {withCredentials: true});
+      await axios.post("/api/v1/users/signup", user, { withCredentials: true });
       console.log("User registered successfully");
       toggleCard();
     } catch (error) {
@@ -57,17 +72,6 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    axios.post('/api/v1/users/logout',null,{withCredentials: true})
-      .then((res) => {
-        console.log(res);
-        socket.emit("UserLogout");
-      })
-      .catch((err) => {
-        seterrorMsg(error.response.data.error);
-        console.log(err);
-      })
-  }, [])
 
   return (
     <div>

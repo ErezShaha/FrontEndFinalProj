@@ -4,3 +4,18 @@
     justify-content: center;
     text-align: center;
 }
+
+.onlineCard{
+    float: right;
+    margin: 50px;
+    width: 300px;
+    align-items: center;
+    background-color: burlywood !important;
+    box-shadow: 10px 10px 8px #888888;
+    max-height: 600px;
+   
+}
+
+ 
+
+ 
