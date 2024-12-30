@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
@@ -97,7 +96,8 @@ const LoginPage = () => {
                     />
                     <br />
                   </InputGroup>
-
+                  
+                  {/* password */}
                   <Card.Title>Password</Card.Title>
                   <InputGroup className="mb-3">
                     <Form.Control
