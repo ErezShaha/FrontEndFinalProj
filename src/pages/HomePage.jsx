@@ -9,6 +9,7 @@ import { Button, CardBody, CardTitle, FormControl, InputGroup,} from "react-boot
 import OnlineUsers from "../components/OnlineUsers.jsx";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PublicChat from "../components/PublicChat.jsx";
 
 // http://localhost:5173/
 
@@ -28,9 +29,9 @@ const HomePage = () => {
     socket.emit("lookAtOnlineUsers");
     console.log("looked");
   };
-  const enterMsgForEveryone =() => {
-    socket.emit("SendMessageToEveryone", msgToAll);
-  };
+  // const enterMsgForEveryone =() => {
+  //   socket.emit("SendMessageToEveryone", msgToAll);
+  // };
 
   useEffect(() => {
     axios
@@ -44,12 +45,12 @@ const HomePage = () => {
         navigate("/");
       });
 
-    socket.on("RecieveMessage", (msgObj) => {
-      console.log(msgObj)
+    // socket.on("RecieveMessage", (msgObj) => {
+    //   console.log(msgObj)
 
-      setmsgBox([...msgBox, msgObj]);
-      console.log(msgBox)
-    });
+    //   setmsgBox([...msgBox, msgObj]);
+    //   console.log(msgBox)
+    // });
 
     socket.on("hereTakeYourUser", (users) => {
       setOnline(users);
@@ -62,7 +63,8 @@ const HomePage = () => {
       <h1> hello! {mainUser.username}</h1>
       <button onClick={() => navigate("/test")}>Go Testing</button>
       <button onClick={logout}>Logout</button>
-      <Card className="chatBox">
+      <PublicChat/>
+      {/* <Card className="chatBox">
         <CardBody>
           <CardTitle>Trade Chat</CardTitle>
           <ul>
@@ -79,7 +81,7 @@ const HomePage = () => {
             <Button onClick={enterMsgForEveryone}>Enter</Button>
           </InputGroup>
         </CardBody>
-      </Card>
+      </Card> */}
 
       <Card className="onlineCard">
         <CardBody>
