@@ -17,8 +17,8 @@ const HomePage = () => {
   const { mainUser } = useGlobalContext();
   const [online, setOnline] = useState([]);
   const navigate = useNavigate();
-  const [msgBox, setmsgBox] = useState([]);
-  const [msgToAll, setmsgToAll] = useState("");
+  // const [msgBox, setmsgBox] = useState([]);
+  // const [msgToAll, setmsgToAll] = useState("");
 
   const logout = async () => {
     console.log("byebye");
@@ -55,7 +55,7 @@ const HomePage = () => {
     socket.on("hereTakeYourUser", (users) => {
       setOnline(users);
     });
-  }, [msgBox]);
+  }, []);
 
   return (
     <div>
