@@ -49,7 +49,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <h1> hello {mainUser.username}</h1>
+      <h1> hello! {mainUser.username}</h1>
       <button onClick={() => navigate("/test")}>Go Testing</button>
       <button onClick={logout}>Logout</button>
 
