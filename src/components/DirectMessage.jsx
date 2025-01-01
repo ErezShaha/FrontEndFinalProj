@@ -23,7 +23,7 @@ const DirectMessage = () => {
 
   useEffect(() => {
     socket.on("RecieveDmMessage", (msgObj) => {
-      setMsgBox([msgBox, msgObj]);
+      setMsgBox(msgObj);
     });
   }, [msgBox]);
 

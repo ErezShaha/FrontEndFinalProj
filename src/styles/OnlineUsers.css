@@ -2,6 +2,11 @@ li::marker{
     color: green;
 }
 
+li Button{
+  margin: 5px;  
+}
+ 
+
 .userCard{
     background-color: rgb(212, 255, 143) !important;
     

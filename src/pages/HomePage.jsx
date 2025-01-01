@@ -30,11 +30,6 @@ const HomePage = () => {
     navigate("/");
   };
 
-  const lookAtOnlineUsers = async () => {
-    socket.emit("lookAtOnlineUsers");
-    console.log("looked");
-  };
-
   useEffect(() => {
     axios
       .post("/api/v1/users/verifyToken", null, { withCredentials: true })
