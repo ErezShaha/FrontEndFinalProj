@@ -6,7 +6,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const Message = ({msgObj}) => {
   return (
-    <ListGroup.Item>{msgObj.user.username}: {msgObj.content} <br/> {msgObj.msgTime}</ListGroup.Item>
+    <div>
+          <ListGroup.Item>{msgObj.user.username}: {msgObj.content} <br/> {msgObj.msgTime}</ListGroup.Item>
+    </div>
   )
 }
 

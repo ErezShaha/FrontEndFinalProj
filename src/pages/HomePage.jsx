@@ -5,11 +5,18 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import Card from "react-bootstrap/Card";
-import { Button, CardBody, CardTitle, FormControl, InputGroup,} from "react-bootstrap";
+import {
+  Button,
+  CardBody,
+  CardTitle,
+  FormControl,
+  InputGroup,
+} from "react-bootstrap";
 import OnlineUsers from "../components/OnlineUsers.jsx";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PublicChat from "../components/PublicChat.jsx";
+import DirectMessage from "../components/DirectMessage.jsx";
 
 // http://localhost:5173/
 
@@ -17,8 +24,6 @@ const HomePage = () => {
   const { mainUser } = useGlobalContext();
   const [online, setOnline] = useState([]);
   const navigate = useNavigate();
-  // const [msgBox, setmsgBox] = useState([]);
-  // const [msgToAll, setmsgToAll] = useState("");
 
   const logout = async () => {
     console.log("byebye");
@@ -29,9 +34,6 @@ const HomePage = () => {
     socket.emit("lookAtOnlineUsers");
     console.log("looked");
   };
-  // const enterMsgForEveryone =() => {
-  //   socket.emit("SendMessageToEveryone", msgToAll);
-  // };
 
   useEffect(() => {
     axios
@@ -45,13 +47,6 @@ const HomePage = () => {
         navigate("/");
       });
 
-    // socket.on("RecieveMessage", (msgObj) => {
-    //   console.log(msgObj)
-
-    //   setmsgBox([...msgBox, msgObj]);
-    //   console.log(msgBox)
-    // });
-
     socket.on("hereTakeYourUser", (users) => {
       setOnline(users);
     });
@@ -59,41 +54,29 @@ const HomePage = () => {
 
   return (
     <div>
+      <div>
+
       <h1>Home Page</h1>
       <h1> hello! {mainUser.username}</h1>
       <button onClick={() => navigate("/test")}>Go Testing</button>
       <button onClick={logout}>Logout</button>
+      </div>
       <PublicChat/>
-      {/* <Card className="chatBox">
-        <CardBody>
-          <CardTitle>Trade Chat</CardTitle>
-          <ul>
-          {msgBox.map((msgObj) => (
-            <li key={msgObj.id}>{msgObj.content}</li>
-          ))}
-          </ul>
-          <InputGroup>
-            <FormControl
-             
-              value={msgToAll}
-              onChange={(e) => setmsgToAll(e.target.value)}
-            />
-            <Button onClick={enterMsgForEveryone}>Enter</Button>
-          </InputGroup>
-        </CardBody>
-      </Card> */}
+      <DirectMessage/>
 
       <Card className="onlineCard">
         <CardBody>
           <CardTitle className="onlineTitle">Online</CardTitle>
           <FontAwesomeIcon icon={faBars} className="onlineTitle" id="burger" />
+          <div className="onlineList">
           {online.map((user) => (
             <OnlineUsers
-              className="userBlock"
-              key={user.username}
-              user={user}
+            className="userBlock"
+            key={user.username}
+            user={user}
             />
           ))}
+          </div>
         </CardBody>
       </Card>
     </div>
