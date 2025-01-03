@@ -12,28 +12,53 @@ import {
 import ListGroup from "react-bootstrap/ListGroup";
 import Message from "../components/Message.jsx";
 import { socket } from "../utils/socket.js";
+import { useGlobalContext } from "../contexts/GlobalContext";
+
 
 const DirectMessage = () => {
-  const [msgBox, setMsgBox] = useState([]);
-  const [roomMessage, setroomMessage] = useState("");
+  const { mainUser } = useGlobalContext();
+  const [message, setMessage] = useState("");
+  const [msgsInRoom, setMsgsInRoom] = useState([]);
+  const [chatWithUser, setChatWithUser] = useState();
+  const [currentRoom, setCurrentRoom] = useState();
 
   const SendMessageToRoom = () => {
-    socket.emit("SendMessageToRoom", roomMessage);
+    socket.emit("SendMessageToRoom", currentRoom, message);
+    setMessage("");
   };
 
   useEffect(() => {
-    socket.on("RecieveDmMessage", (msgObj) => {
-      setMsgBox(msgObj);
+    socket.on("RecieveDmMessage", (message) => {
+      console.log("Got Messages" + message);
+      setMsgsInRoom([...msgsInRoom, message]);
     });
-  }, [msgBox]);
+
+    socket.on("LoadRoomChat", (messages, users, room) => {
+      console.log("aaaaaaaaaaaaa")
+      currentRoom ? socket.emit("LeaveRoom", currentRoom) : null;
+      currentRoom !== room ? socket.emit("JoinRoom", room): null;
+      console.log("Loading Room chat" + messages);
+      setCurrentRoom(room);
+      setMsgsInRoom(messages);
+      for(let user of users) {
+        if(user != mainUser.username){
+          setChatWithUser(user);
+        }
+      };
+    });
+
+  }, [chatWithUser, msgsInRoom, message, currentRoom]);
 
   return (
     <Card className="privateChatBox">
       <CardBody>
-        <CardTitle>Private Chat</CardTitle>
+        {currentRoom ? 
+          <CardTitle>Private Chat With {chatWithUser}</CardTitle> :
+          <CardTitle>Select a User to Chat</CardTitle>
+        }
         
         <ListGroup className="chatMessagesBox">
-          {msgBox.map((msgObj) => (
+          {msgsInRoom.map((msgObj) => (
             <Message 
             key={msgObj.id} 
             msgObj={msgObj}
@@ -43,11 +68,11 @@ const DirectMessage = () => {
         </ListGroup>
 
         <InputGroup className="chatInput">
-          <FormControl
-            value={roomMessage}
-            onChange={(e) => setroomMessage(e.target.value)}
+          <FormControl 
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
-          <Button onClick={SendMessageToRoom}>Enter</Button>
+          <Button disabled={!currentRoom ? true : message != ""? false : true} onClick={SendMessageToRoom}>Enter</Button>
         </InputGroup>
       </CardBody>
     </Card>

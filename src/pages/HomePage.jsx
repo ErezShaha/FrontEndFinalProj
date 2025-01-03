@@ -65,11 +65,12 @@ const HomePage = () => {
           <FontAwesomeIcon icon={faBars} className="onlineTitle" id="burger" />
           <div className="onlineList">
           {online.map((user) => (
+            user.username != mainUser.username ?
             <OnlineUsers
             className="userBlock"
             key={user.username}
             user={user}
-            />
+            /> : null
           ))}
           </div>
         </CardBody>

@@ -14,8 +14,8 @@ import { socket } from "../utils/socket";
 const OnlineUsers = ({ user }) => {
   const [room, setRoom] = useState();
 
-  const chatRoom = () => {
-    socket.emit("chatRoom", user.username);
+  const startChatRoom = () => {
+    socket.emit("StartChatRoom", user.username);
   };
 
   const openChat = () => {
@@ -24,11 +24,14 @@ const OnlineUsers = ({ user }) => {
 
   useEffect(() => {
     socket.on("RoomNumberForUser", (username, roomNumber) => {
+      console.log("RoomNumberForUser");
+      console.log(username, roomNumber);
       if (user.username === username) {
+        console.log(roomNumber);
         setRoom(roomNumber);
-        socket.emit("JoinRoom", room);
       }
     });
+
   }, []);
 
   return (
@@ -36,8 +39,8 @@ const OnlineUsers = ({ user }) => {
       <CardBody>
         <li>
           <span>{user.username}</span>
-          <Button variant="warning" onClick={room ? openChat : chatRoom}>
-            chat
+          <Button variant="warning" onClick={room ? openChat : startChatRoom}>
+          open chat
           </Button>
           <Button variant="danger">game</Button>
         </li>
