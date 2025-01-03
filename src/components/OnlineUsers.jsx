@@ -8,21 +8,29 @@ import { CardBody } from "react-bootstrap";
 import HomePage from "../pages/HomePage";
 import "../styles/OnlineUsers.css";
 import { socket } from "../utils/socket";
+import { useGlobalContext } from "../contexts/GlobalContext";
+
 
 // http://localhost:5173/
 
 const OnlineUsers = ({ user }) => {
+  const { mainUser } = useGlobalContext();
   const [room, setRoom] = useState();
 
   const startChatRoom = () => {
+    console.log("StartChatRoom");
     socket.emit("StartChatRoom", user.username);
   };
 
   const openChat = () => {
-    socket.emit("LoadRoom", room);
+    console.log("openChat");
+    socket.emit("JoinAndLoadRoom", room);
   };
 
   useEffect(() => {
+    socket.on("Reee", () => {
+      console.log("Reee");
+    });
     socket.on("RoomNumberForUser", (username, roomNumber) => {
       console.log("RoomNumberForUser");
       console.log(username, roomNumber);
@@ -40,7 +48,7 @@ const OnlineUsers = ({ user }) => {
         <li>
           <span>{user.username}</span>
           <Button variant="warning" onClick={room ? openChat : startChatRoom}>
-          open chat
+            {room ? "openChats" : "startChatRooms"}
           </Button>
           <Button variant="danger">game</Button>
         </li>
@@ -50,3 +58,4 @@ const OnlineUsers = ({ user }) => {
 };
 
 export default OnlineUsers;
+//

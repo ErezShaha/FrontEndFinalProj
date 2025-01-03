@@ -34,20 +34,19 @@ const DirectMessage = () => {
     });
 
     socket.on("LoadRoomChat", (messages, users, room) => {
-      console.log("aaaaaaaaaaaaa")
-      currentRoom ? socket.emit("LeaveRoom", currentRoom) : null;
-      currentRoom !== room ? socket.emit("JoinRoom", room): null;
-      console.log("Loading Room chat" + messages);
+      console.log("Loading Room chat");
+
       setCurrentRoom(room);
       setMsgsInRoom(messages);
+
       for(let user of users) {
-        if(user != mainUser.username){
+        if(user !== mainUser.username){
           setChatWithUser(user);
         }
       };
     });
 
-  }, [chatWithUser, msgsInRoom, message, currentRoom]);
+  }, [msgsInRoom, chatWithUser, message, mainUser, currentRoom]);
 
   return (
     <Card className="privateChatBox">
