@@ -58,8 +58,8 @@ const OnlineUsers = ({ user }) => {
       }
     });
 
-    socket.on("MsgNotif", (sendingUser) => {
-      if (sendingUser === user.username) {
+    socket.on("MsgNotif", (newMsgFromUsername) => {
+      if (newMsgFromUsername === user.username) {
         setMsgNotif(true);
       }
     });
