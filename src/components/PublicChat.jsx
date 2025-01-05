@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import "../styles/HomePage.css";
 import {
@@ -15,34 +15,42 @@ import { socket } from "../utils/socket.js";
 const PublicChat = () => {
   const [msgBox, setMsgBox] = useState([]);
   const [msgToAll, setMsgToAll] = useState("");
+  const messagesEndRef = useRef(null); // Add ref for scrolling
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const enterMsgForEveryone = () => {
     socket.emit("SendMessageToEveryone", msgToAll);
+    setMsgToAll("");
   };
 
+  
   useEffect(() => {
     socket.on("RecieveMessage", (msgObj) => {
       setMsgBox([...msgBox, msgObj]);
     });
+    scrollToBottom();
   }, [msgBox]);
 
-  // useEffect(() => {
-  //   socket.on("RecieveMessage", (msgObj) => {
-  //     setMsgBox([msgObj, ...msgBox]);
-  //   });
+ 
+
   return (
     <Card className="publicChatBox">
       <CardBody>
         <CardTitle>Public Chat</CardTitle>
-        
+
         <ListGroup className="chatMessagesBox">
           {msgBox.map((msgObj) => (
             <Message
-              key={msgObj.id}
-              msgObj={msgObj}
-              className="publicChatMessage"
+            key={msgObj.id}
+            msgObj={msgObj}
+            className="publicChatMessage"
             ></Message>
           ))}
+            {/* Add this div as scroll anchor */}
+          <div ref={messagesEndRef} />
         </ListGroup>
 
         <InputGroup className="chatInput">
@@ -50,7 +58,12 @@ const PublicChat = () => {
             value={msgToAll}
             onChange={(e) => setMsgToAll(e.target.value)}
           />
-          <Button onClick={enterMsgForEveryone}>Enter</Button>
+          <Button
+            disabled={msgToAll != "" ? false : true}
+            onClick={enterMsgForEveryone}
+          >
+            Enter
+          </Button>
         </InputGroup>
       </CardBody>
     </Card>

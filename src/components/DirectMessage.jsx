@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Card from "react-bootstrap/Card";
 import {
   Button,
@@ -21,10 +21,16 @@ const DirectMessage = () => {
   const [msgsInRoom, setMsgsInRoom] = useState([]);
   const [chatWithUser, setChatWithUser] = useState();
   const [currentRoom, setCurrentRoom] = useState();
+  const messagesEndRef = useRef(null); // Add ref for scrolling
+  
 
   const SendMessageToRoom = () => {
     socket.emit("SendMessageToRoom", currentRoom, message);
     setMessage("");
+  };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -46,7 +52,8 @@ const DirectMessage = () => {
       };
     });
 
-  }, [msgsInRoom, chatWithUser, message, mainUser, currentRoom]);
+    scrollToBottom();
+  }, [msgsInRoom, chatWithUser, mainUser, currentRoom]);
 
   return (
     <Card className="privateChatBox">
@@ -64,6 +71,8 @@ const DirectMessage = () => {
             className="publicChatMessage"
             ></Message>
           ))}
+          {/* Add this div as scroll anchor */}
+          <div ref={messagesEndRef} />
         </ListGroup>
 
         <InputGroup className="chatInput">

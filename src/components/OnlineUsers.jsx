@@ -28,9 +28,6 @@ const OnlineUsers = ({ user }) => {
   };
 
   useEffect(() => {
-    socket.on("Reee", () => {
-      console.log("Reee");
-    });
     socket.on("RoomNumberForUser", (username, roomNumber) => {
       console.log("RoomNumberForUser");
       console.log(username, roomNumber);
