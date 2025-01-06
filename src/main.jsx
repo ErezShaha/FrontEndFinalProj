@@ -7,6 +7,7 @@ import TestPage from './pages/TestPage';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { GlobalStateProvider } from "./contexts/GlobalContext";
+import "./styles/index.css"
 
 axios.defaults.baseURL = "http://localhost:8080";
 
@@ -14,11 +15,13 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <GlobalStateProvider>
       <BrowserRouter>
+      <div >
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/test" element={<TestPage/>} />
         </Routes>
+      </div>
       </BrowserRouter>
     </GlobalStateProvider>
   </StrictMode>

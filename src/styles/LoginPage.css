@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    
 }
 
 .bigTitle{
@@ -11,4 +12,13 @@
       
 }
 
-    
+.coolCard{
+    background-color: rgb(200, 252, 160) !important;
+    box-shadow: 0px 0px 100px  #c5ff8e;
+}
+/* body {
+    background-image: url("../images/Gemini_Generated_Image_8ju8gr8ju8gr8ju8.jpg");
+    background-size: cover;
+  } */
+
+ 

@@ -73,12 +73,12 @@ const LoginPage = () => {
 
 
   return (
-    <div>
+    <div className="Theme">
       {isCard ? (
         //sign in
         <div className="centerDiv">
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
+          <Card className="coolCard" style={{ width: "18rem" }}>
+            <Card.Body className="signinTheme">
               <h1 className="bigTitle">Bomboclat</h1>
               <Card.Subtitle className="mb-2 text-muted">Sign In</Card.Subtitle>
               <Card.Title>Username</Card.Title>

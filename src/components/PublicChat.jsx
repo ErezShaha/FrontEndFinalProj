@@ -12,7 +12,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Message from "../components/Message.jsx";
 import { socket } from "../utils/socket.js";
 
-const PublicChat = () => {
+const PublicChat = ({smallBLock}) => {
   const [msgBox, setMsgBox] = useState([]);
   const [msgToAll, setMsgToAll] = useState("");
   const messagesEndRef = useRef(null); // Add ref for scrolling
