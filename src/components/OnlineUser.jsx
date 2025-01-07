@@ -13,7 +13,7 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 
 // http://localhost:5173/
 
-const OnlineUsers = ({ user }) => {
+const OnlineUser = ({ user }) => {
   const { mainUser } = useGlobalContext();
   const [room, setRoom] = useState();
   const [msgNotif, setMsgNotif] = useState(false);
@@ -91,5 +91,5 @@ const OnlineUsers = ({ user }) => {
   );
 };
 
-export default OnlineUsers;
+export default OnlineUser;
 //

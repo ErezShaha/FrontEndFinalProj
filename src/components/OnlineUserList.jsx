@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/OnlineUserList.css";
 import Card from "react-bootstrap/Card";
 import { CardBody, CardTitle } from "react-bootstrap";
-import OnlineUsers from "../components/OnlineUsers.jsx";
+import OnlineUser from "./OnlineUser.jsx";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalContext } from "../contexts/GlobalContext";
@@ -31,7 +31,7 @@ const OnlineUserList = () => {
           <div className="onlineList">
             {online.map((user) =>
               user.username != mainUser.username ? (
-                <OnlineUsers
+                <OnlineUser
                   className="userBlock"
                   key={user.username}
                   user={user}
