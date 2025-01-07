@@ -12,11 +12,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Message from "../components/Message.jsx";
 import { socket } from "../utils/socket.js";
 
-const PublicChat = ({smallBLock}) => {
+const PublicChat = () => {
   const [msgBox, setMsgBox] = useState([]);
   const [msgToAll, setMsgToAll] = useState("");
   const messagesEndRef = useRef(null); // Add ref for scrolling
-
+  
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -24,6 +24,7 @@ const PublicChat = ({smallBLock}) => {
   const enterMsgForEveryone = () => {
     socket.emit("SendMessageToEveryone", msgToAll);
     setMsgToAll("");
+    scrollToBottom();
   };
 
   
@@ -31,7 +32,6 @@ const PublicChat = ({smallBLock}) => {
     socket.on("RecieveMessage", (msgObj) => {
       setMsgBox([...msgBox, msgObj]);
     });
-    scrollToBottom();
   }, [msgBox]);
 
  

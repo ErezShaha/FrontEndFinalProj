@@ -8,8 +8,8 @@ li Button{
  
 
 .userCard{
-    background-color: rgb(212, 255, 143) !important;
-    
+    background-color: rgb(120, 150, 73) !important;
+    text-shadow:0px 0px 5px #84ff00;
 }
 
 .onlineFriends{

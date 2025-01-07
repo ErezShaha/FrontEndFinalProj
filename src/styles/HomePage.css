@@ -11,8 +11,9 @@
     min-height: 600px;
     max-height: 600px;
     width: 300px;
-    background-color: rgb(96, 225, 135) !important;
+    background-color: rgb(19, 89, 40) !important;
     box-shadow: 0px 0px 100px hwb(123 59% 7%);   
+    text-shadow:0px 0px 5px #84ff00;
 }
 .onlineList{
     margin: 5px;
@@ -42,8 +43,9 @@
     min-height: 600px;
     max-height: 600px;
     width: 500px;
-    background-color: rgb(235, 244, 138) !important;
+    background-color: rgb(87, 92, 23) !important;
     box-shadow: 0px 0px 100px #ecff96;
+    text-shadow:0px 0px 5px #ffdd00;
 }
 
 
@@ -65,9 +67,9 @@
     min-height: 600px;
     max-height: 600px;
     width: 500px;
-    background-color: rgb(138, 242, 244) !important;
+    background-color: rgb(5, 125, 128) !important;
     box-shadow: 0px 0px 100px #0effe7;
-     
+    text-shadow:0px 0px 5px #00eaff;
 }
 
 .publicChatMessage{

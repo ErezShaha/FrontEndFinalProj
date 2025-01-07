@@ -27,6 +27,7 @@ const DirectMessage = () => {
   const SendMessageToRoom = () => {
     socket.emit("SendMessageToRoom", currentRoom, message);
     setMessage("");
+    scrollToBottom();
   };
 
   const scrollToBottom = () => {
@@ -52,7 +53,6 @@ const DirectMessage = () => {
       };
     });
 
-    scrollToBottom();
   }, [msgsInRoom, chatWithUser, mainUser, currentRoom]);
 
   return (
