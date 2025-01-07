@@ -40,7 +40,7 @@ const GamePage = () => {
 
   }, []);
   return (
-    <div>
+    <div className="niga">
         {bothHere ? <GameArea/> : <h1>Waiting for the other player...</h1>}
         <DirectMessage/>
     </div>
