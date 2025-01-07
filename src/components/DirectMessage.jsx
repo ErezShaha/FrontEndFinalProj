@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 import {
   Button,
   CardBody,
-  CardSubtitle,
   CardTitle,
   FormControl,
   InputGroup,
@@ -27,29 +26,29 @@ const DirectMessage = () => {
   const SendMessageToRoom = () => {
     socket.emit("SendMessageToRoom", currentRoom, message);
     setMessage("");
-    scrollToBottom();
   };
-
+  
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
+  
   useEffect(() => {
     socket.on("RecieveDmMessage", (message) => {
       setMsgsInRoom([...msgsInRoom, message]);
     });
-
+    
     socket.on("LoadRoomChat", (messages, users, room) => {
       console.log("Loading Room chat");
       setCurrentRoom(room);
       setMsgsInRoom(messages);
-
+      
       for(let user of users) {
         if(user !== mainUser.username){
           setChatWithUser(user);
         }
       };
     });
+    scrollToBottom();
 
   }, [msgsInRoom, chatWithUser, mainUser, currentRoom]);
 

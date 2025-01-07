@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import GameArea from "../components/GameArea.jsx"
 import DirectMessage from "../components/DirectMessage.jsx";
+import "../styles/GamePage.css"
 
 const GamePage = () => {
   const {room} = useParams();

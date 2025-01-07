@@ -8,7 +8,6 @@ import GamePage from './pages/GamePage';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { GlobalStateProvider } from "./contexts/GlobalContext";
-import "./styles/index.css"
 
 axios.defaults.baseURL = "http://localhost:8080";
 

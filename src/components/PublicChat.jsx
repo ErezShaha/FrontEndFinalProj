@@ -18,14 +18,14 @@ const PublicChat = () => {
   const enterMsgForEveryone = () => {
     socket.emit("SendMessageToEveryone", msgToAll);
     setMsgToAll("");
-    scrollToBottom();
   };
-
+  
   
   useEffect(() => {
     socket.on("RecieveMessage", (msgObj) => {
       setMsgBox([...msgBox, msgObj]);
     });
+    scrollToBottom();
   }, [msgBox]);
 
  

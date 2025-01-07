@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../styles/HomePage.css";
 import { socket } from "../utils/socket.js";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -7,6 +6,7 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 import PublicChat from "../components/PublicChat.jsx";
 import DirectMessage from "../components/DirectMessage.jsx";
 import OnlineUserList from "../components/OnlineUserList.jsx";
+import "../styles/HomePage.css";
 
 // http://localhost:5173/
 
@@ -41,8 +41,8 @@ const HomePage = () => {
         <button onClick={logout}>Logout</button>
       </div>
       <PublicChat />
-      <DirectMessage />
       <OnlineUserList />
+      <DirectMessage />
     </div>
   );
 };
