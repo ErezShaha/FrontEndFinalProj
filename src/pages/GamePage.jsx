@@ -7,7 +7,8 @@ import GameArea from "../components/GameArea.jsx"
 import DirectMessage from "../components/DirectMessage.jsx";
 
 const GamePage = () => {
-  const room = useState(useParams());
+  const {room} = useParams();
+
   const navigate = useNavigate();
   const [bothHere, setBothHere] = useState(false)
 
@@ -17,7 +18,6 @@ const GamePage = () => {
       .then((res) => {
         console.log(res);
         socket.emit("CheckLoggedin", res.data);
-        console.log(room)
         socket.emit("JoinAndLoadRoom", room);
         socket.emit("StartGameRoom", room, window.location.href);
       })

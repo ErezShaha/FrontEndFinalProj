@@ -36,13 +36,11 @@ const DirectMessage = () => {
 
   useEffect(() => {
     socket.on("RecieveDmMessage", (message) => {
-      console.log("Got Messages" + message);
       setMsgsInRoom([...msgsInRoom, message]);
     });
 
     socket.on("LoadRoomChat", (messages, users, room) => {
       console.log("Loading Room chat");
-      console.log(users)
       setCurrentRoom(room);
       setMsgsInRoom(messages);
 
