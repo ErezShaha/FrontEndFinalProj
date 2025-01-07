@@ -30,13 +30,6 @@ const HomePage = () => {
         console.log(err);
         navigate("/");
       });
-
-    socket.on("GoWaitInGameRoom", (room) => {
-      console.log(
-        `I go sit in the conrner (room: ${room}) and wait for my friend :)`
-      );
-      navigate(`/game/${room}`);
-    });
   }, []);
 
   return (
