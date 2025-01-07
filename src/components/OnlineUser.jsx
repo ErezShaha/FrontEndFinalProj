@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import { CardBody } from "react-bootstrap";
-import HomePage from "../pages/HomePage";
 import "../styles/OnlineUsers.css";
 import { socket } from "../utils/socket";
 import { useGlobalContext } from "../contexts/GlobalContext";
@@ -33,7 +29,7 @@ const OnlineUser = ({ user }) => {
 
 
   const inviteToGame = () => {
-    console.log("inviting User To Game");
+    console.log("inviting User To Gae");
     socket.emit("InviteUserToGame", user.username);
   }
   
@@ -70,13 +66,6 @@ const OnlineUser = ({ user }) => {
       }
     });
   }, []);
-
-  socket.on("GoWaitInGameRoom", (room) => {
-    console.log(
-      `I go sit in the conrner (room: ${room}) and wait for my friend :)`
-    );
-    navigate(`/game/${room}`);
-  });
 
   return (
     <Card className="userCard">

@@ -42,7 +42,7 @@ const DirectMessage = () => {
 
     socket.on("LoadRoomChat", (messages, users, room) => {
       console.log("Loading Room chat");
-
+      console.log(users)
       setCurrentRoom(room);
       setMsgsInRoom(messages);
 

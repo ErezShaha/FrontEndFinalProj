@@ -8,6 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { socket } from "../utils/socket.js";
+import { useNavigate } from "react-router";
 
 
 
@@ -15,12 +16,22 @@ import { socket } from "../utils/socket.js";
 const OnlineUserList = () => {
   const { mainUser } = useGlobalContext();
   const [online, setOnline] = useState([]);
- 
+  const navigate = useNavigate();
+
   useEffect(() => {
     socket.on("hereTakeYourUser", (users) => {
       setOnline(users);
     });
+
+    socket.on("GoWaitInGameRoom", (room) => {
+      console.log(
+        `I go sit in the conrner (room: ${room}) and wait for my friend :)`
+      );
+      navigate(`/game/${room}`);
+    });
+  
   }, []);
+
 
   return (
     <div>

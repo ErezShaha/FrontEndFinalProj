@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/test" element={<TestPage/>} />
-          <Route path="/game" element={<GamePage/>} />
+          <Route path="/game/:room" element={<GamePage/>} />
         </Routes>
       </div>
       </BrowserRouter>
