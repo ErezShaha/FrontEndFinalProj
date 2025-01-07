@@ -77,9 +77,9 @@ const OnlineUsers = ({ user }) => {
         <li>
           <span>{user.username}</span>
           <Button variant="warning" onClick={room ? openChat : startChatRoom}>
-            {room ? "openChats" : "startChatRooms"}
+            {msgNotif ? "New Message" : "startChatRooms"}
           </Button>
-          {msgNotif ? <div>aigool</div> : null}
+       
 
           <Button variant="danger" onClick={busyUser ? disabled=true : (room ? joinGame : inviteToGame)}>
             {busyUser ? "In A Game" : (gameNotif ? "Join A Game" : "Invite To A Game")}
