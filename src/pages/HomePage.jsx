@@ -64,6 +64,7 @@ const HomePage = () => {
             </ul>
           )}
         </div>
+        
       </div>
       <PublicChat />
       <OnlineUserList />
