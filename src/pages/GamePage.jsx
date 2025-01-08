@@ -3,15 +3,15 @@ import { socket } from "../utils/socket.js";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
-import GameArea from "../components/GameArea.jsx"
+import GameArea from "../components/GameArea.jsx";
 import DirectMessage from "../components/DirectMessage.jsx";
-import "../styles/GamePage.css"
+import "../styles/GamePage.css";
 
 const GamePage = () => {
-  const {room} = useParams();
+  const { room } = useParams();
 
   const navigate = useNavigate();
-  const [bothHere, setBothHere] = useState(false)
+  const [bothHere, setBothHere] = useState(false);
 
   useEffect(() => {
     axios
@@ -28,21 +28,31 @@ const GamePage = () => {
       });
 
     socket.on("AreYouHereToPlay", (otherUserLocation) => {
-        if(otherUserLocation === window.location.href) {
-            socket.emit("ImHereLetsGo", room);
-        }
-      });
+      if (otherUserLocation === window.location.href) {
+        socket.emit("ImHereLetsGo", room);
+      }
+    });
     socket.on("BothHere", () => {
-        if(!bothHere) {
-            setBothHere(true);
-        }
-      });
-
+      if (!bothHere) {
+        setBothHere(true);
+      }
+    });
   }, []);
   return (
-    <div className="niga">
-        {bothHere ? <GameArea/> : <h1>Waiting for the other player...</h1>}
-        <DirectMessage/>
+    <div className="gameDiv">
+      <div >
+        {bothHere ? (
+          <div className="gamePageCenter">
+            <h1>good morning assaf</h1>
+            <button>ex egool</button>
+            <br />
+            <button>mishak ha-zikaron</button>
+          </div>
+        ) : (
+          <h1>Waiting for the other player...</h1>
+        )}
+      </div>
+      <DirectMessage />
     </div>
   );
 };

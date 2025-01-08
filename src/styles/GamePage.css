@@ -1,10 +1,44 @@
-.niga > .privateChatBox{
-    float:right;
-    margin: 50px;
-    min-height: 600px; 
-    max-height: 600px;
-    width: 300px;
+.gameDiv {
+    display: flex;
+    justify-content: center; /* Changed from space-between */
+    align-items: center; /* Centers content vertically */
+    height: 100vh; /* Takes full viewport height */
+    padding: 20px;
+    width: 100%;
+    gap: 20px; /* Add consistent spacing between elements */
+    min-height: 100vh; /* Add this to make container full height */
+}
+
+/* Center container */
+/* Add a container for the game center content */
+.gameDiv > div:first-child {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* This will center vertically */
+    max-width: 800px;
+}
+
+.gamePageCenter {   
+    height: 200px;
+    width: 300px; /* Set a fixed width for the gamePageCenter */
+    padding: 10px;
+    text-align: center;
+    border: 3px solid;
+    margin: 0;
+    box-shadow: 0px 0px 100px #b30eff;
+    text-shadow: 0px 0px 5px #cc00ff;
+    
+}
+
+.gameDiv .privateChatBox {
+    position: absolute; /* Position it absolutely */
+    top: 50%; /* Vertically centered */
+    right: 0; /* Align to the right side */
+    transform: translateY(-50%); /* Adjust vertical position to perfectly center it */
+    margin: 0px 50px 0px 0px;
+    width: 300px; /* Set width for the chat box */
     background-color: rgb(19, 142, 145) !important;
     box-shadow: 0px 0px 100px #0effe7;
-    text-shadow:0px 0px 5px #00eaff;
+    text-shadow: 0px 0px 5px #00eaff;
 }
