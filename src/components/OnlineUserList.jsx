@@ -4,8 +4,7 @@ import "../styles/OnlineUserList.css";
 import Card from "react-bootstrap/Card";
 import { CardBody, CardTitle } from "react-bootstrap";
 import OnlineUser from "./OnlineUser.jsx";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { socket } from "../utils/socket.js";
 import { useNavigate } from "react-router";
@@ -38,7 +37,6 @@ const OnlineUserList = () => {
       <Card className="onlineCard">
         <CardBody>
           <CardTitle className="onlineTitle">Online</CardTitle>
-          <FontAwesomeIcon icon={faBars} className="onlineTitle" id="burger" />
           <div className="onlineList">
             {online.map((user) =>
               user.username != mainUser.username ? (
