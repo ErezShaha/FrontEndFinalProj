@@ -44,9 +44,9 @@ const GamePage = () => {
         {bothHere ? (
           <div className="gamePageCenter">
             <h1>good morning assaf</h1>
-            <button>ex egool</button>
+            <button className="exegool">ex egool</button>
             <br />
-            <button>mishak ha-zikaron</button>
+            <button className="zikaron">mishak ha-zikaron</button>
           </div>
         ) : (
           <h1>Waiting for the other player...</h1>

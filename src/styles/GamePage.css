@@ -26,6 +26,7 @@
     text-align: center;
     border: 3px solid;
     margin: 0;
+    color: #dd00ff;
     box-shadow: 0px 0px 100px #b30eff;
     text-shadow: 0px 0px 5px #cc00ff;
     
@@ -41,4 +42,19 @@
     background-color: rgb(19, 142, 145) !important;
     box-shadow: 0px 0px 100px #0effe7;
     text-shadow: 0px 0px 5px #00eaff;
+}
+
+.exegool{
+ background-color: red;   
+ border-style: none;
+ box-shadow: 0px 0px 10px #ff2a0e;
+ margin: 8px;
+ border-radius: 25%;
+}
+.zikaron{
+ background-color: rgb(225, 255, 0);   
+ border-style: none;
+ box-shadow: 0px 0px 10px #efff0e;
+ margin: 3px;
+ border-radius: 25%;
 }
