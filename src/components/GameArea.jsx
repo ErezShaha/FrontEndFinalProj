@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { socket } from "../utils/socket.js";
 
-const GameArea = () => {
+const GameArea = ({ gameName }) => {
+  
 
-    useEffect(() => {
-      socket.on("")
-    
+  useEffect(() => {
 
-    }, [])
+
+  }, [])
     
   return (
-    <div>GameArea</div>
+    <div>
+      {gameName === 'exegool' ? <Exegool /> : <Zikaron/>}
+    </div>
   )
 }
 

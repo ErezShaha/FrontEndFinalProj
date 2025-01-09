@@ -12,7 +12,13 @@ const GamePage = () => {
 
   const navigate = useNavigate();
   const [bothHere, setBothHere] = useState(false);
+  const [selectedGame, setSelectedGame] = useState();
 
+    const selectGame = (gameName) => {
+        setSelectedGame(gameName);
+        socket.emit("GamePicked", gameName, room);
+    }
+    
   useEffect(() => {
     axios
       .post("/api/v1/users/verifyToken", null, { withCredentials: true })
@@ -41,13 +47,16 @@ const GamePage = () => {
   return (
     <div className="gameDiv">
       <div >
-        {bothHere ? (
-          <div className="gamePageCenter">
-            <h1>good morning assaf</h1>
-            <button className="exegool">ex egool</button>
-            <br />
-            <button className="zikaron">mishak ha-zikaron</button>
-          </div>
+        {bothHere ? 
+            {selectedGame} ? 
+                <GameArea gameName={selectedGame}/> 
+                : (
+                <div className="gamePageCenter">
+                    <h1>good morning assaf</h1>
+                    <button className="exegool" onClick={selectGame(exegool)}>ex egool</button>
+                    <br />
+                    <button className="zikaron" onClick={selectGame(zikaron)}>mishak ha-zikaron</button>
+                </div>
         ) : (
           <h1>Waiting for the other player...</h1>
         )}
