@@ -9,19 +9,27 @@ import "../styles/componentsStyles/GameArea.css";
 const GameArea = ({ gameName }) => {
   const { mainUser } = useGlobalContext();
   const { room } = useGamePageContext();
-  const [turn, setturn] = useState(true);
+  const [yourTurn, setyourTurn] = useState(false);
   const username = mainUser.username
 
-  const toggleTurn = () => {
-    setturn(!turn);
+  const toggleTurn = async (e) => {
+    e.preventDefault();
+    setturn(!yourTurn);
   };
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    socket.on("You'reFirst", () => {
+      setyourTurn(!yourTurn)
+    })
+  }, [])
+  
+ 
   console.log(room);
   return (
     <div>
       <div className="GameTitle">
         <span className="turns">turn:</span>
-        <span id={turn ? "player1" : "player2"}>{turn? "your": "opps"}</span>
+        <span id={yourTurn ? "player1" : "player2"}>{yourTurn? "your": "opps"}</span>
       </div>
       <button onClick={toggleTurn}  />
       {gameName === "Tictactoe" ? <Tictactoe /> : <MemoryGame />}

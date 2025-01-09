@@ -32,6 +32,8 @@ const GamePage = () => {
         console.log(err);
         navigate("/");
       });
+  
+      
 
     socket.on("AreYouHereToPlay", (otherUserLocation) => {
       if (otherUserLocation === window.location.href) {
