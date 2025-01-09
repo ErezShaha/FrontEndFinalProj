@@ -1,3 +1,30 @@
 .GameTitle{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 100;  /* Ensures it stays on top of other content */
+  padding: 10px 0;    
+}
+.turns{
+    font-size: xx-large;
+}
+
+#player2{
+    font-size: xx-large;
     display: inline-block;
+    min-width: 50px;
+    max-width: 50px;
+    color: red;
+    margin:  0px 0px 0px 40px;
+
+}
+#player1{
+    font-size: xx-large;
+    display: inline-block;
+    min-width: 50px;
+    max-width: 50px;
+    color: blue;
+    margin:  0px 0px 0px 40px;
 }

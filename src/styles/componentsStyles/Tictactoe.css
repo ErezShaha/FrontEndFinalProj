@@ -1,0 +1,28 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+  }
+.tictactoeCell{
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.unchecked{
+    transition: background-color 0.3s ease;
+    background-color: white;
+}
+.checkedX{
+    transition: background-color 0.3s ease;
+    background-color: blue;
+}
+.checkedO{
+    transition: background-color 0.3s ease;
+    background-color: red;
+}

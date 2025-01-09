@@ -16,8 +16,7 @@ const GamePage = () => {
   const [selectedGame, setSelectedGame] = useState(null);
 
   const selectGame = (gameName) => {
-    setSelectedGame(gameName);  // Store the actual game name
-    socket.emit("GamePicked", gameName, room);
+     socket.emit("GamePicked", gameName, room);
   };
 
   useEffect(() => {
@@ -39,6 +38,11 @@ const GamePage = () => {
         socket.emit("ImHereLetsGo", room);
       }
     });
+
+    socket.on("MoveToGame", (gamePicked) => {
+      setSelectedGame(gamePicked);
+  })
+
     socket.on("BothHere", () => {
       if (!bothHere) {
         setBothHere(true);
@@ -55,12 +59,12 @@ const GamePage = () => {
             ) : (
               <div className="gamePageCenter">
                 <h1>good morning assaf</h1>
-                <button className="exegool" onClick={() =>selectGame("Tictactoe")}>
-                  ex egool
+                <button className="ttt" onClick={() =>selectGame("Tictactoe")}>
+                  Tictactoe
                 </button>
                 <br />
-                <button className="zikaron" onClick={() => selectGame("MemoryGame")}>
-                  mishak ha-zikaron
+                <button className="memory" onClick={() => selectGame("MemoryGame")}>
+                  Memory Game
                 </button>
               </div>
             )

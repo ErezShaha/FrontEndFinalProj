@@ -3,27 +3,30 @@ import { socket } from "../utils/socket.js";
 import { useGamePageContext } from "../contexts/GamePageContext.jsx";
 import Tictactoe from "./Tictactoe.jsx";
 import MemoryGame from "./MemoryGame.jsx";
-import "../styles/componentsStyles/GameArea.css"
-
-
+import { useGlobalContext } from "../contexts/GlobalContext";
+import "../styles/componentsStyles/GameArea.css";
 
 const GameArea = ({ gameName }) => {
-  
-  const {room} = useGamePageContext();
-  useEffect(() => {
+  const { mainUser } = useGlobalContext();
+  const { room } = useGamePageContext();
+  const [turn, setturn] = useState(true);
+  const username = mainUser.username
 
-
-  }, [])
-    console.log(room);
+  const toggleTurn = () => {
+    setturn(!turn);
+  };
+  useEffect(() => {}, []);
+  console.log(room);
   return (
     <div>
-      <div className="GameTitle" id="player1">player 1</div>
-      <h1 className="GameTitle" >{room}</h1>
-      <div className="GameTitle"  id="player2">player 2</div>
-      <div className="turns">who's turn is it?</div>
-      {gameName === 'exegool' ? <Tictactoe /> : <MemoryGame/>}
+      <div className="GameTitle">
+        <span className="turns">turn:</span>
+        <span id={turn ? "player1" : "player2"}>{turn? "your": "opps"}</span>
+      </div>
+      <button onClick={toggleTurn}  />
+      {gameName === "Tictactoe" ? <Tictactoe /> : <MemoryGame />}
     </div>
-  )
-}
+  );
+};
 
-export default GameArea
+export default GameArea;
