@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PublicChat from "../components/PublicChat.jsx";
 import DirectMessage from "../components/DirectMessage.jsx";
 import OnlineUserList from "../components/OnlineUserList.jsx";
-import "../styles/HomePage.css";
+import "../styles/pageStyles/HomePage.css";
 
 // http://localhost:5173/
 

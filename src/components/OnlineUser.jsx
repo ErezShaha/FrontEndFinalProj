@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { CardBody } from "react-bootstrap";
-import "../styles/OnlineUsers.css";
+import "../styles/componentsStyles/OnlineUsers.css";
 import { socket } from "../utils/socket";
 import { useGlobalContext } from "../contexts/GlobalContext";
 

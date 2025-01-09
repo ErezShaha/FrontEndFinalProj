@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import "../styles/OnlineUserList.css";
+import "../styles/componentsStyles/OnlineUserList.css";
 import Card from "react-bootstrap/Card";
 import { CardBody, CardTitle } from "react-bootstrap";
 import OnlineUser from "./OnlineUser.jsx";

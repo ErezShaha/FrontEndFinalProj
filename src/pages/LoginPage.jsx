@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import "../styles/LoginPage.css";
+import "../styles/pageStyles/LoginPage.css";
 import { socket } from "../utils/socket.js";
 import { useGlobalContext } from "../contexts/GlobalContext";
 
