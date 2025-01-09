@@ -16,7 +16,8 @@ const GamePage = () => {
   const [selectedGame, setSelectedGame] = useState(null);
 
   const selectGame = (gameName) => {
-     socket.emit("GamePicked", gameName, room);
+    setSelectedGame(gameName);
+    socket.emit("GamePicked", gameName, room);
   };
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const GamePage = () => {
       
 
     socket.on("AreYouHereToPlay", (otherUserLocation) => {
+        setSelectedGame(false);
       if (otherUserLocation === window.location.href) {
         socket.emit("ImHereLetsGo", room);
       }
@@ -43,13 +45,17 @@ const GamePage = () => {
 
     socket.on("MoveToGame", (gamePicked) => {
       setSelectedGame(gamePicked);
-  })
+    });
 
     socket.on("BothHere", () => {
       if (!bothHere) {
         setBothHere(true);
       }
     });
+
+    socket.on("NewPageNewMe", () => {
+        setBothHere(false);
+    })
   }, []);
   return (
     <GamePageContext.Provider value={{ room }}>
