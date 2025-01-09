@@ -5,7 +5,10 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import GameArea from "../components/GameArea.jsx";
 import DirectMessage from "../components/DirectMessage.jsx";
+import { GamePageContext } from "../contexts/GamePageContext.jsx";
 import "../styles/GamePage.css";
+
+
 
 const GamePage = () => {
   const { room } = useParams();
@@ -45,24 +48,26 @@ const GamePage = () => {
     });
   }, []);
   return (
-    <div className="gameDiv">
-      <div >
-        {bothHere ? 
-            {selectedGame} ? 
-                <GameArea gameName={selectedGame}/> 
-                : (
-                <div className="gamePageCenter">
-                    <h1>good morning assaf</h1>
-                    <button className="exegool" onClick={selectGame(exegool)}>ex egool</button>
-                    <br />
-                    <button className="zikaron" onClick={selectGame(zikaron)}>mishak ha-zikaron</button>
-                </div>
-        ) : (
-          <h1>Waiting for the other player...</h1>
-        )}
-      </div>
-      <DirectMessage />
-    </div>
+    <GamePageContext.Provider value={{room}}>
+        <div className="gameDiv">
+        <div >
+            {bothHere ? 
+                {selectedGame} ? 
+                    <GameArea gameName={selectedGame}/> 
+                    : (
+                    <div className="gamePageCenter">
+                        <h1>good morning assaf</h1>
+                        <button className="exegool" onClick={selectGame(exegool)}>ex egool</button>
+                        <br />
+                        <button className="zikaron" onClick={selectGame(zikaron)}>mishak ha-zikaron</button>
+                    </div>
+            ) : (
+            <h1>Waiting for the other player...</h1>
+            )}
+        </div>
+        <DirectMessage />
+        </div>
+     </GamePageContext.Provider>
   );
 };
 
