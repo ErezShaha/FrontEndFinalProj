@@ -5,7 +5,7 @@ import "../styles/componentsStyles/MemoryGame.css";
 
 
 const MemoryGame = ({yourTurn}) => {
-  const [grid, setGrid] = useState([]); 
+  const [grid, setGrid] = useState(['', '', '', '', '', '', '', '','','','','','','','','']); 
   const [slotOne, setSlotOne] = useState();
   const [slotTwo, setSlotTwo] = useState();
   const [player, setPlayer] = useState("Player Two");
