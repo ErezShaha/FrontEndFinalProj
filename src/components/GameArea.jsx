@@ -8,37 +8,64 @@ import "../styles/componentsStyles/GameArea.css";
 
 const GameArea = ({ gameName }) => {
   const { mainUser } = useGlobalContext();
-  const { room } = useGamePageContext();
   const [turn, setTurn] = useState(false);
+  const [winner, setWinner] = useState();
 
-  const username = mainUser.username
+  const username = mainUser.username;
 
-  const toggleTurn = async (e) => {
-    e.preventDefault();
-    setTurn(!turn);
-  };
+  // const toggleTurn = async (e) => {
+  //   e.preventDefault();
+  //   setTurn(!turn);
+  // };
 
   useEffect(() => {
     socket.on("you'reFirst", () => {
       console.log("ImFirst");
-      setTurn(!turn)
-    })
+      setTurn(!turn);
+    });
     socket.on("NextTurn", () => {
       console.log("NextTurn");
-      setTurn(!turn)
-    })
-  }, [turn])
+      setTurn(!turn);
+    });
+    socket.on("Tie", () => {
+      setWinner("tie");
+    });
+    socket.on("Win", (winCondition, winner) => {
+      setWinner(winner);
+    });
+  }, [turn]);
 
   return (
     <div>
       <div className="GameTitle">
         <span className="turns">turn:</span>
-        <span id={turn ? "player1" : "player2"}>{turn? "your": "opps"}</span>
+        <span id={turn ? "player1" : "player2"}>{turn ? "your" : "opps"}</span>
+        <br/>
+        {winner ? (
+          winner === "tie" ? (
+            <span className="conclusion">its a tie</span>
+          ) : (
+            <span className="conclusion">{`${winner} won`}</span>
+          )
+        ) : null}
       </div>
-      <button onClick={toggleTurn}  />
-      {gameName === "Tictactoe" ? <Tictactoe yourTurn={turn}/> : <MemoryGame yourTurn={turn}/>}
+      {gameName === "Tictactoe" ? (
+        <Tictactoe yourTurn={turn} />
+      ) : (
+        <MemoryGame yourTurn={turn} />
+      )}
     </div>
   );
 };
 
 export default GameArea;
+
+// <div>
+//   {winCondition ? (
+//     winCondition === "tie" ? (
+//       <h1>Its A Tie. Game Over</h1>
+//     ) : (
+//       <h1>{`Player ${winner} Won The Game`}</h1>
+//     )
+//   ) : null}
+// </div>;

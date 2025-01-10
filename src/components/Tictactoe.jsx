@@ -34,13 +34,7 @@ const Tictactoe = ({yourTurn}) => {
 
   return (
     <div>
-      {winCondition 
-        ? (winCondition === "tie" 
-            ? <h1>Its A Tie. Game Over</h1> 
-            : <h1>{`Player ${winner} Won The Game`}</h1> 
-          ) 
-        : null 
-      }
+     
       <div className="grid">
         {grid.map((cell, index) => (
           <div key={index} 

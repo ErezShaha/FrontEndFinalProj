@@ -5,7 +5,8 @@
     grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: repeat(3, 1fr); 
   }
-.tictactoeCell{
+  
+  .tictactoeCell {
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -13,22 +14,115 @@
     justify-content: center;
     align-items: center;
     font-size: 50px;
-}
-
-.unchecked{
-    transition: background-color 0.3s ease;
-    background-color: white;
     cursor: pointer;
-}
-.checkedX{
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .unchecked {
+    border: solid 2px blue;
+    box-shadow: 0px 0px 10px #ff9696;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .unchecked:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+  }
+  
+  .checkedX {
     background-color: rgb(64, 166, 221);
-}
-.checkedO{
-    transition: background-color 0.3s ease;
+    border: solid 2px color red;
+    box-shadow: 0px 0px 10px #ff9696;
+
+    animation: zoomInX 0.5s ease-out;
+  }
+  
+  .checkedO {
     background-color: rgb(251, 61, 61);
-}
-.winningCells{
-    transition: background-color 0.3s ease;
-    background-color: rgb(20, 152, 20);
-}
+    box-shadow: 0px 0px 10px #ff9696;
+
+    animation: zoomInO 0.5s ease-out;
+  }
+  
+  .winningCells {
+    background-color: rgb(43, 224, 43);
+    border: solid 3px;
+    animation: shake 0.5s ease, glowing 1s infinite alternate;
+  }
+  
+  /* Cell Click Animation - Bounce Effect */
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* X Mark Animation - Zoom-In Effect */
+  @keyframes zoomInX {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* O Mark Animation - Rotate Effect */
+  @keyframes zoomInO {
+    0% {
+      transform: rotate(360deg) scale(0);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+  
+  /* Winning Cells - Shake Effect */
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+    75% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Winning Cells - Glowing Effect */
+  @keyframes glowing {
+    0% {
+      box-shadow: 0 0 5px rgb(43, 224, 43);
+    }
+    50% {
+      box-shadow: 0 0 20px rgb(43, 224, 43);
+    }
+    100% {
+      box-shadow: 0 0 5px rgb(43, 224, 43);
+    }
+  }

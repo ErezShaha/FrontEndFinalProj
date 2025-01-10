@@ -4,7 +4,6 @@ import "../styles/componentsStyles/OnlineUserList.css";
 import Card from "react-bootstrap/Card";
 import { CardBody, CardTitle } from "react-bootstrap";
 import OnlineUser from "./OnlineUser.jsx";
-
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { socket } from "../utils/socket.js";
 import { useNavigate } from "react-router";
