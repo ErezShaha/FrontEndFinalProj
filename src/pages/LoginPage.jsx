@@ -8,6 +8,8 @@ import { useNavigate } from "react-router";
 import "../styles/pageStyles/LoginPage.css";
 import { socket } from "../utils/socket.js";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 // http://localhost:5173/
 
@@ -26,14 +28,13 @@ const LoginPage = () => {
       .then((res) => {
         console.log(res);
         socket.emit("UserLogout");
-        sessionStorage.clear()
+        sessionStorage.clear();
       })
       .catch((err) => {
         seterrorMsg(error.response.data.error);
         console.log(err);
       });
   }, []);
-
 
   const toggleCard = () => {
     setuser({ username: "", password: "" });
@@ -56,7 +57,6 @@ const LoginPage = () => {
       console.log(error);
     }
   };
-  
 
   const register = async (e) => {
     e.preventDefault();
@@ -70,7 +70,6 @@ const LoginPage = () => {
       console.log(error);
     }
   };
-
 
   return (
     <div className="Theme">
@@ -96,7 +95,7 @@ const LoginPage = () => {
                     />
                     <br />
                   </InputGroup>
-                  
+
                   {/* password */}
                   <Card.Title>Password</Card.Title>
                   <InputGroup className="mb-3">
@@ -111,10 +110,11 @@ const LoginPage = () => {
                       type={PassowrdVis}
                     />
                     <Button
+                      className="eyeButton"
                       onMouseDown={() => setPassVIs("text")}
                       onMouseUp={() => setPassVIs("password")}
                     >
-                      o
+                      {PassowrdVis === "text"? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
                     </Button>
                   </InputGroup>
 
@@ -134,7 +134,7 @@ const LoginPage = () => {
       ) : (
         //register
         <div className="centerDiv">
-          <Card style={{ width: "18rem" }}>
+          <Card className="coolCard2" style={{ width: "18rem" }}>
             <Card.Body>
               <h1 className="bigTitle">Bomboclat</h1>
               <Card.Subtitle className="mb-2 text-muted">
@@ -171,10 +171,12 @@ const LoginPage = () => {
                       type={PassowrdVis}
                     />
                     <Button
+                      className="eyeButton"
                       onMouseDown={() => setPassVIs("text")}
                       onMouseUp={() => setPassVIs("password")}
                     >
-                      o
+                      {PassowrdVis === "text"? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                      
                     </Button>
                   </InputGroup>
 
