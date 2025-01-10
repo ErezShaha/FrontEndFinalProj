@@ -18,6 +18,7 @@ const GameArea = ({ gameName }) => {
   const username = mainUser.username;
 
   const RestartGame = () => {
+    setWinner(null);
     setTurn(false);
     socket.emit("GamePicked", gameName, room);
   };
@@ -32,6 +33,7 @@ const GameArea = ({ gameName }) => {
 
   useEffect(() => {
     socket.on("You'reFirst", () => {
+      setWinner(null);
       console.log("ImFirst");
       setTurn(true);
     });

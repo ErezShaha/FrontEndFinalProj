@@ -12,12 +12,14 @@ const Tictactoe = ({yourTurn}) => {
   const { room } = useGamePageContext();
 
   const cellClicked = (slot) => {
-    socket.emit("TurnTaken", room, slot);
+    socket.emit("TurnTakenTTT", room, slot);
   }
 
 
   useEffect(() => {
     socket.on("UpdateBoard", (board) => {
+      setWinCondition();
+      setWinner();
       setGrid(board);
     });
     socket.on("Tie", () => {

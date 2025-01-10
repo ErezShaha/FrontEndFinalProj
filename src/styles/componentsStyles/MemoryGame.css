@@ -1,0 +1,30 @@
+.mgGrid {
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(4, 1fr); 
+  }
+
+.memoryGameCell{
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+
+.myCell{
+    border: 2px solid rgb(64, 166, 221);
+}
+.yourCell{
+    border: 2px solid  rgb(251, 61, 61);
+}
+
+
+
+
+
+
