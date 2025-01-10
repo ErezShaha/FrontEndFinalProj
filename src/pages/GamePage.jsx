@@ -20,6 +20,10 @@ const GamePage = () => {
     socket.emit("GamePicked", gameName, room);
   };
 
+  const GoHome = () => {
+    navigate("/home");
+  }
+
   useEffect(() => {
     axios
       .post("/api/v1/users/verifyToken", null, { withCredentials: true })
@@ -66,7 +70,7 @@ const GamePage = () => {
               <GameArea gameName={selectedGame} />
             ) : (
               <div className="gamePageCenter">
-                <h1>good morning assaf</h1>
+                <h1>Choose Game</h1>
                 <button className="ttt" onClick={() =>selectGame("Tictactoe")}>
                   Tictactoe
                 </button>
@@ -77,7 +81,10 @@ const GamePage = () => {
               </div>
             )
           ) : (
-            <h1>Waiting for the other player...</h1>
+            <div>
+              <h1>Waiting for the other player...</h1>
+              <span className="GameButtons"><button onClick={GoHome}>Home</button></span>
+            </div>
           )}
         </div>
         <DirectMessage />

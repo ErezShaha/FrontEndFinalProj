@@ -38,3 +38,45 @@
     text-shadow:0px 0px 5px #00fff7;
     margin:  0px 0px 0px 40px;
 }
+
+.notRelevent{
+    visibility: hidden;
+    display: none;
+}
+
+#notRelevent{
+    visibility: hidden;
+    display: none;
+}
+
+.GameButtons {
+    position: absolute; /* Position the buttons absolutely */
+    top: 10px; /* 10px from the top */
+    right: 10px; /* 10px from the left */
+    display: flex; /* Arrange the buttons in a row */
+    gap: 10px; /* Adds space between the buttons */
+  }
+  
+  .GameButtons button {
+    font-size: 16px; /* Adjust font size */
+    padding: 15px 30px; /* Add padding to make the button bigger */
+    height: 50px; /* Set fixed height */
+    width: 150px; /* Set fixed width */
+    cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+    border-radius: 30px; /* Rounded corners for the buttons */
+    background-color: #b80808; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    text-align: center; /* Center the text inside the button */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+    overflow: hidden; /* Hide any overflowed content */
+    display: inline-flex; /* Use inline-flex to allow text to be centered vertically */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+  }
+  
+  .GameButtons button:hover {
+    background-color: #ff0000; /* Slightly darker green on hover */
+    box-shadow: 0 0 10px rgba(255, 2, 2, 0.8); 
+  }
