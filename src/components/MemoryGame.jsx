@@ -5,30 +5,33 @@ import "../styles/componentsStyles/MemoryGame.css";
 
 
 const MemoryGame = ({yourTurn}) => {
-  const [grid, setGrid] = useState(['', '', '', '', '', '', '', '','','','','','','','','']); 
-  const [slotOne, setSlotOne] = useState();
-  const [slotTwo, setSlotTwo] = useState();
+  const [grid, setGrid] = useState(['', '', '', '', '', '', '', '','','','','','','','','']);
+  const [selectedSlots, setSelectedSlots] = useState({}) 
   const [player, setPlayer] = useState("Player Two");
   const [gameEnded, setGameEnded] = useState(false);
   const { room } = useGamePageContext();
   
 
-  const cellClicked = (slot) => {
-    !slotOne ? setSlotOne(slot) : 
-    !slotTwo ? (setSlotTwo(slot),
-      socket.emit("TurnTakenTTT",room, slotOne, slotTwo),
-      setSlotOne(),
-      setSlotTwo() ):
-    null;
+  const cellClicked = (index) => {
+    if (Object.keys(selectedSlots).length < 2){
+      socket.emit("LookAtSlot", room, index);
+    }    
   }
 
 
   useEffect(() => {
     socket.on("You'reFirst", () => {
       setPlayer("Player One")
-    })
-    socket.on("UpdateBoard", (board) => {
-      setGrid(board);
+    });
+
+    socket.on("RevealedSlot", (slotColor, index) => {
+      setSelectedSlots({...selectedSlots, [index]: slotColor});
+    });
+
+    socket.on("UpdateBoard", (opendSlots) => {
+      setGameEnded(false);
+      setSelectedSlots({});
+      setGrid(opendSlots);
     });
 
     socket.on("Tie", () => {
@@ -38,19 +41,34 @@ const MemoryGame = ({yourTurn}) => {
       setGameEnded(true);
     });
 
-  }, [])
-  
+    if (Object.keys(selectedSlots).length === 2 && yourTurn){
+      console.log("TurnTakenMG");
+      socket.emit("TurnTakenMG", room, Object.keys(selectedSlots));
+    }
+    socket.on("NextTurn", () => {
+      setSelectedSlots({});
+    })
+
+    console.log(selectedSlots)
+  }, [grid, selectedSlots])
 
   return (
     <div className="mgGrid">
-        {grid.map((cell, index) => (
-          <div key={index} 
-          style={{backgroundColor: cell !== '' ? cell.color : null}}
-          className={`memoryGameCell ${cell !== '' ? (cell.player === player ? "myCell" : "yourCell") : null}`}
-          onClick={gameEnded || !yourTurn ? null : () => cellClicked(index)}>
-          </div>
-        ))}
-      </div>
+      {grid.map((cell, index) => (
+        <div key={index} 
+        style={
+          {backgroundColor: 
+            cell !== '' ? cell.color : 
+
+            selectedSlots[index] ? selectedSlots[index] :
+            null
+          }
+        }
+        className={`memoryGameCell ${cell !== '' ? (cell.player === player ? "myCell" : "yourCell") : "unselected"}`}
+        onClick={gameEnded || !yourTurn ? null : () => cellClicked(index)}>
+        </div>
+      ))}
+    </div>
   )
 }
 

@@ -35,8 +35,6 @@ const Tictactoe = ({yourTurn}) => {
 
 
   return (
-    <div>
-     
       <div className="grid">
         {grid.map((cell, index) => (
           <div key={index} 
@@ -48,7 +46,6 @@ const Tictactoe = ({yourTurn}) => {
           </div>
         ))}
       </div>
-    </div>
   )
 }
 
