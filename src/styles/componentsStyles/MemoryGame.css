@@ -1,13 +1,15 @@
+/* Memory game grid */
 .mgGrid {
     width: 400px;
     height: 400px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    grid-template-rows: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     transform: transform 0.2s ease, background-color 0.3s ease;
   }
-
-.memoryGameCell{
+  
+  /* Memory game cells */
+  .memoryGameCell {
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -15,20 +17,51 @@
     justify-content: center;
     align-items: center;
     font-size: 50px;
-}
-
-.myCell{
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Hover animation */
+  .memoryGameCell:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Styling for cells that are clicked (animation feedback) */
+  .memoryGameCell.clicked {
+    transform: scale(0.9);
+    animation: clickEffect 0.3s ease-out forwards;
+  }
+  
+  /* Flip animation effect */
+  @keyframes clickEffect {
+    0% {
+      transform: scale(0.9) rotateY(0deg);
+    }
+    50% {
+      transform: scale(1) rotateY(180deg);
+    }
+    100% {
+      transform: scale(1) rotateY(360deg);
+    }
+  }
+  
+  /* My cells */
+  .myCell {
     border: 3px solid rgb(64, 166, 221);
     transition: transform 0.2s ease, background-color 0.3s ease;
-
-}
-.yourCell{
-    border: 3px solid  rgb(251, 61, 61);
+  }
+  
+  /* Your cells */
+  .yourCell {
+    border: 3px solid rgb(251, 61, 61);
     transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-
-
-
-
-
+  }
+  
+  /* Unselected cells */
+  .unselected {
+    border: solid 1px peru;
+    box-shadow: 0 0 10px rgba(255, 2, 2, 0.8);
+  }

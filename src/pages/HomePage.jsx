@@ -58,12 +58,12 @@ const HomePage = () => {
                   onClick={() => setburgerButton(!burgerButton)}
                 />
               </li>
-              <li>
+              {/* <li>
                 <button className="burgerOptions">Settings</button>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <button className="burgerOptions">Contact</button>
-              </li>
+              </li> */}
               <li>
                 <button className="burgerOptions" onClick={logout}>
                   Logout
