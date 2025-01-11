@@ -41,8 +41,6 @@ const OnlineUser = ({ user }) => {
 
   useEffect(() => {
     socket.on("RoomNumberForUser", (username, roomNumber) => {
-      console.log("RoomNumberForUser");
-      console.log(username, roomNumber);
       if (user.username === username) {
         console.log(roomNumber);
         setRoom(roomNumber);
