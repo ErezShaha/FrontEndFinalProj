@@ -78,7 +78,7 @@ const LoginPage = () => {
         <div className="centerDiv">
           <Card className="coolCard" style={{ width: "18rem" }}>
             <Card.Body className="signinTheme">
-              <h1 className="bigTitle">Bomboclat</h1>
+              <h1 className="bigTitle">ChatBox</h1>
               <Card.Subtitle className="mb-2 text-muted">Sign In</Card.Subtitle>
               <Card.Title>Username</Card.Title>
               <Form onSubmit={login}>
@@ -136,7 +136,7 @@ const LoginPage = () => {
         <div className="centerDiv">
           <Card className="coolCard2" style={{ width: "18rem" }}>
             <Card.Body>
-              <h1 className="bigTitle">Bomboclat</h1>
+              <h1 className="bigTitle">ChatBox</h1>
               <Card.Subtitle className="mb-2 text-muted">
                 Register
               </Card.Subtitle>
