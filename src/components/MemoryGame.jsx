@@ -37,20 +37,20 @@ const MemoryGame = ({yourTurn}) => {
     socket.on("Tie", () => {
       setGameEnded(true);
     });
+
     socket.on("Win", (a, b) => {
       setGameEnded(true);
     });
 
+    socket.on("NextTurn", () => {
+      setSelectedSlots({});
+    })
+    
     if (Object.keys(selectedSlots).length === 2 && yourTurn){
       console.log("TurnTakenMG");
       socket.emit("TurnTakenMG", room, Object.keys(selectedSlots));
       
     }
-    socket.on("NextTurn", () => {
-      setSelectedSlots({});
-    })
-
-    console.log(selectedSlots)
   }, [grid, selectedSlots])
 
   return (
@@ -78,7 +78,3 @@ const MemoryGame = ({yourTurn}) => {
 }
 
 export default MemoryGame
-
-// `background-color ${
-//   Object.keys(selectedSlots).length === 2 &&
-//   Object.keys(selectedSlots).indexOf(String(index)) ? "0.3s ease-out" : "none"}}`
