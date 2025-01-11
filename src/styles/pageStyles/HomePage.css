@@ -12,7 +12,7 @@
     max-height: 600px;
     width: 300px;
     background-color: rgb(27, 127, 57) !important;
-    box-shadow: 0px 0px 100px hwb(123 59% 7%);   
+    box-shadow: 0px 0px 50px hwb(123 59% 7%);   
     text-shadow:0px 0px 5px #84ff00;
 }
 .onlineList{
@@ -31,10 +31,24 @@
  
 }
 
-#burger{
-    border-style: outset;
-    border-width: 2px;
-    border-color: blanchedalmond;
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+    height: 80px; /* Fixed height for header */
+}
+
+ /* Main content container */
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    height: calc(100vh - 80px); /* Viewport height minus header height */
+    padding: 20px;
+    gap: 20px;
+    overflow: hidden;
 }
 
 .publicChatBox{
@@ -44,7 +58,7 @@
     max-height: 600px;
     width: 500px;
     background-color: rgb(126, 133, 28) !important;
-    box-shadow: 0px 0px 100px #ecff96;
+    box-shadow: 0px 0px 50px #ecff96;
     text-shadow:0px 0px 5px #ffdd00;
 }
 
@@ -68,7 +82,7 @@
     max-height: 600px;
     width: 500px;
     background-color: rgb(19, 142, 145) !important;
-    box-shadow: 0px 0px 100px #0effe7;
+    box-shadow: 0px 0px 50px #0effe7;
     text-shadow:0px 0px 5px #00eaff;
 }
 
@@ -80,44 +94,91 @@
 .Theme{
     background-color: rgb(6, 6, 39);
     color: rgb(161, 255, 217);
-    text-shadow:0px 0px 50px #00ffff;
+    text-shadow:0px 0px 30px #00ffff;
 }
 
 body {
 
     background-color: rgb(6, 6, 39) !important;
     color: rgb(161, 255, 255) !important;
-    /* background-image: url("../images/Gemini_Generated_Image_8ju8gr8ju8gr8ju8.jpg");
-    background-size: cover; */
 }
 
+/* Add these new styles */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+  }
 
+  .titles-container {
+    margin: 15px 0px 0px 0px;
+    flex-grow: 1;
+    text-align: center;
+  }
 
+  .titles {
+    margin: 0.5rem 0;
+  }
 
+  .burgerMenu {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+  }
 
+  /* Updated burger menu styles */
+.burgerMenu ul {
+    position: absolute;
+    right: 0;
+    top: 2.5rem; /* Adjusted to prevent moving the icon */
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    background-color: rgb(6, 6, 39);
+    border: 1px solid rgb(161, 255, 217);
+    border-radius: 4px;
+    z-index: 1000; /* Added to ensure menu appears above other elements */
+  }
 
+  .burgerOptions {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    background: none;
+    border: none;
+    color: rgb(161, 255, 217);
+    cursor: pointer;
+  }
 
+  .burgerOptions:hover {
+    background-color: rgba(161, 255, 217, 0.1);
+  }
 
-
-
-
-
-/* @keyframes appear {
-    from{
-        opacity: 0;
-        scale: 0.5;
-    }
-    to{
-        opacity: 1;
-        scale: 1;
-    }
-}
-.userBlock{
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40% ;
   
-} */
- 
+#burger {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: fixed; /* Changed to fixed to maintain position */
+    right: 2rem;
+    top: 1rem;
+  }
 
- 
+  /* New styles for the burger icon container */
+  .burgerMenu li:first-child {
+    margin-bottom: 0.5rem;
+  }
+
+  /* New styles for the burger icon container */
+  .burgerMenu li:first-child {
+    margin-bottom: 0.5rem;
+  }
+
+
+
+
+
+
+

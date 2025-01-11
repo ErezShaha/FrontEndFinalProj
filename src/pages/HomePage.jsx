@@ -37,9 +37,11 @@ const HomePage = () => {
 
   return (
     <div className="Theme">
-      <div>
-        <h1 className="titles">Home Page</h1>
-        <h1 className="titles"> hello! {mainUser.username}</h1>
+      <div className="header-container">
+        <div className="titles-container">
+          <h1 className="titles">ChatBox</h1>
+          <h1 className="titles">Welcome! {mainUser.username}</h1>
+        </div>
         <div className="burgerMenu">
           {burgerButton ? (
             <FontAwesomeIcon
@@ -50,27 +52,35 @@ const HomePage = () => {
           ) : (
             <ul>
               <li>
-              <FontAwesomeIcon icon={faBars} id="burger" onClick={() => setburgerButton(!burgerButton)}/>
+                <FontAwesomeIcon
+                  icon={faBars}
+                  id="burger"
+                  onClick={() => setburgerButton(!burgerButton)}
+                />
               </li>
               <li>
                 <button className="burgerOptions">Settings</button>
               </li>
-                <button className="burgerOptions">Contact</button>
               <li>
-                </li>
-                <li>
-                <button className="burgerOptions" onClick={logout}>Logout</button>
-                </li>
+                <button className="burgerOptions">Contact</button>
+              </li>
+              <li>
+                <button className="burgerOptions" onClick={logout}>
+                  Logout
+                </button>
+              </li>
             </ul>
           )}
         </div>
-        
       </div>
-      <PublicChat />
-      <OnlineUserList />
-      <DirectMessage />
+      <div className="content-container">
+        <PublicChat />
+        <DirectMessage />
+        <OnlineUserList />
+      </div>
     </div>
   );
 };
 
 export default HomePage;
+

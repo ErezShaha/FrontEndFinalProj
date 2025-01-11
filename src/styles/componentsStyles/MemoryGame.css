@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     grid-template-rows: repeat(4, 1fr); 
+    transform: transform 0.2s ease, background-color 0.3s ease;
   }
 
 .memoryGameCell{
@@ -17,10 +18,13 @@
 }
 
 .myCell{
-    border: 2px solid rgb(64, 166, 221);
+    border: 3px solid rgb(64, 166, 221);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
 }
 .yourCell{
-    border: 2px solid  rgb(251, 61, 61);
+    border: 3px solid  rgb(251, 61, 61);
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 

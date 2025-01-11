@@ -70,6 +70,7 @@ const GamePage = () => {
               <GameArea gameName={selectedGame} />
             ) : (
               <div className="gamePageCenter">
+                <span className="GameButtons"><button onClick={GoHome}>Home</button></span>
                 <h1>Choose Game</h1>
                 <button className="ttt" onClick={() =>selectGame("Tictactoe")}>
                   Tictactoe

@@ -18,6 +18,8 @@ const OnlineUserList = () => {
 
   useEffect(() => {
     socket.on("hereTakeYourUser", (users) => {
+      console.log("got updated users")
+      console.log(users)
       setOnline(users);
     });
 

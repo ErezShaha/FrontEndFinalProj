@@ -44,6 +44,7 @@ const MemoryGame = ({yourTurn}) => {
     if (Object.keys(selectedSlots).length === 2 && yourTurn){
       console.log("TurnTakenMG");
       socket.emit("TurnTakenMG", room, Object.keys(selectedSlots));
+      
     }
     socket.on("NextTurn", () => {
       setSelectedSlots({});
@@ -57,7 +58,11 @@ const MemoryGame = ({yourTurn}) => {
       {grid.map((cell, index) => (
         <div key={index} 
         style={
-          {backgroundColor: 
+          {transition: 
+            ['transform 0.5s ease', 'background-color 0.3s ease',
+              `background-color ${Object.keys(selectedSlots).length === 2 ? ' 0.3s ease-out' : null}`
+            ],
+            backgroundColor: 
             cell !== '' ? cell.color : 
 
             selectedSlots[index] ? selectedSlots[index] :
@@ -73,3 +78,7 @@ const MemoryGame = ({yourTurn}) => {
 }
 
 export default MemoryGame
+
+// `background-color ${
+//   Object.keys(selectedSlots).length === 2 &&
+//   Object.keys(selectedSlots).indexOf(String(index)) ? "0.3s ease-out" : "none"}}`

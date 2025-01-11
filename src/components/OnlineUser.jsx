@@ -14,7 +14,7 @@ const OnlineUser = ({ user }) => {
   const [room, setRoom] = useState();
   const [msgNotif, setMsgNotif] = useState(false);
   const [gameNotif, setGameNotif] = useState(false);
-  const [busyUser, setBusyUser] = useState(false);
+  const [busyUser, setBusyUser] = useState(user.isBusy);
 
   const startChatRoom = () => {
     console.log("StartChatRoom");
@@ -38,6 +38,7 @@ const OnlineUser = ({ user }) => {
     socket.emit("JoinGameRoom", room, user.username);
   }
 
+
   useEffect(() => {
     socket.on("RoomNumberForUser", (username, roomNumber) => {
       console.log("RoomNumberForUser");
@@ -48,8 +49,8 @@ const OnlineUser = ({ user }) => {
       }
     });
 
-    socket.on("UserIsIngame", (busyUser, secondBusyUser) => {
-      if (user.username === busyUser && mainUser.username !== secondBusyUser) {
+    socket.on("UserIsIngame", (busyUser) => {
+      if (user.username === busyUser) {
         setBusyUser(true);
       }
     });
@@ -62,10 +63,11 @@ const OnlineUser = ({ user }) => {
 
     socket.on("GameNotif", (sendingUser) => {
       if (sendingUser === user.username) {
+        setBusyUser(false);
         setGameNotif(true);
       }
     });
-  }, []);
+  }, [gameNotif]);
 
   return (
     <Card className="userCard">
@@ -77,7 +79,7 @@ const OnlineUser = ({ user }) => {
           </Button>
        
 
-          <Button variant="danger" onClick={busyUser ? disabled=true : (room ? joinGame : inviteToGame)}>
+          <Button variant="danger" disabled={busyUser} onClick={room ? joinGame : inviteToGame}>
             {busyUser ? "In A Game" : (gameNotif ? "Accept Invite To Game" : "Invite To A Game")}
           </Button>
         </li>
