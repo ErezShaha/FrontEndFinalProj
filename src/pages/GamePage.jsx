@@ -30,8 +30,7 @@ const GamePage = () => {
       .then((res) => {
         console.log(res);
         socket.emit("CheckLoggedin", res.data);
-        socket.emit("JoinAndLoadRoom", room);
-        socket.emit("StartGameRoom", room, window.location.href);
+        socket.emit("JoinAndLoadRoom", room, window.location.href);
       })
       .catch((err) => {
         console.log(err);
