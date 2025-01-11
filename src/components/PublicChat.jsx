@@ -21,7 +21,7 @@
     
     
     useEffect(() => {
-      socket.on("RecieveMessage", (msgObj) => {
+      socket.on("RecieveGlobalMessage", (msgObj) => {
         setMsgBox([...msgBox, msgObj]);
       });
       scrollToBottom();

@@ -17,7 +17,7 @@ const OnlineUserList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.on("hereTakeYourUser", (users) => {
+    socket.on("OnlineUsersChange", (users) => {
       setOnline(users);
     });
 

@@ -31,7 +31,7 @@ const Tictactoe = ({yourTurn}) => {
     });
 
 
-  }, [winner])
+  }, [winCondition, winner])
 
 
   return (

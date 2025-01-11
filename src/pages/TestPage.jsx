@@ -30,7 +30,7 @@ const TestPage = () => {
             navigate('/')
             });
         
-        socket.on("hereTakeYourUser", (users) => {
+        socket.on("OnlineUsersChange", (users) => {
             setOnlineUsers(users);
         });
         }, []);
