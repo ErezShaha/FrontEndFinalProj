@@ -24,10 +24,11 @@ const GameArea = ({ gameName }) => {
   };
 
   const GoToGameMenu = () => {
-    socket.emit("ReturnToGameSelection",room);
+    socket.emit("CancelGame",room);
   };
   
   const GoHome = () => {
+    socket.emit("PlayerLeft",room);
     navigate("/home");
   }
 
@@ -82,12 +83,4 @@ const GameArea = ({ gameName }) => {
 
 export default GameArea;
 
-// <div>
-//   {winCondition ? (
-//     winCondition === "tie" ? (
-//       <h1>Its A Tie. Game Over</h1>
-//     ) : (
-//       <h1>{`Player ${winner} Won The Game`}</h1>
-//     )
-//   ) : null}
-// </div>;
+

@@ -57,10 +57,10 @@ const GamePage = () => {
       }
     });
 
-    socket.on("NewPageNewMe", () => {
+    socket.on("PlayerLeft", () => {
         setBothHere(false);
     })
-  }, []);
+  }, [bothHere]);
   return (
     <GamePageContext.Provider value={{ room }}>
       <div className="gameDiv">

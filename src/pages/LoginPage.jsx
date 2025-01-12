@@ -31,7 +31,7 @@ const LoginPage = () => {
         sessionStorage.clear();
       })
       .catch((err) => {
-        seterrorMsg(error.response.data.error);
+        seterrorMsg(err.response.data.error);
         console.log(err);
       });
   }, []);
@@ -46,14 +46,13 @@ const LoginPage = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/users/login", user, {
-        withCredentials: true,
-      });
+      await axios.post("/api/v1/users/login", user, {withCredentials: true}).then((res) => {
       socket.emit("UserLogin", res.data);
       sessionStorage.setItem("user", res.data);
       setmainUser({ ...mainUser, username: res.data });
       navigate("/home");
-    } catch (error) {
+    })} catch (error) {
+      seterrorMsg(error.response.data.error);
       console.log(error);
     }
   };
@@ -124,7 +123,7 @@ const LoginPage = () => {
                 </Form.Group>
               </Form>
               <br />
-              {errorMsg == null ? <br /> : <p>{errorMsg}</p>}
+              {errorMsg === null ? <br /> : <p>{errorMsg}</p>}
               <Button variant="primary" onClick={toggleCard}>
                 Register
               </Button>
